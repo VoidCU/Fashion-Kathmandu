@@ -1,3 +1,3 @@
 # Fashion-Kathmandu
 
-# All Rights Belogs to ELytra solutions
+# All Rights Belongs to ELytra solutions
