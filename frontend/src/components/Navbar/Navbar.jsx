@@ -38,14 +38,19 @@ function Navbar() {
                   <i className="fa fa-youtube-play hover:text-black"></i>
                 </a>
               </div>
-              <div className="text-sm text-gray-700">some random facts</div>
+              <div className="text-sm text-gray-700">
+                Best items you can find anywhere
+              </div>
             </div>
             <div className="text-sm text-gray-700">{formattedDate}</div>
           </div>
         </div>
         <div className="">
           <div className="flex justify-between items-center max-w-6xl m-auto px-4">
-            <div>
+            <div
+              onClick={() => (window.location.href = '/')}
+              className="cursor-pointer"
+            >
               <img src="/images/logo.png" className="h-12 " alt="" />
             </div>
             <div className="flex gap-4 items-center">
