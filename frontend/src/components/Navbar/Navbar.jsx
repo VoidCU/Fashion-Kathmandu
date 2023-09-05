@@ -46,7 +46,7 @@ function Navbar() {
         <div className="">
           <div className="flex justify-between items-center max-w-6xl m-auto px-4">
             <div>
-              <img src="/images/logo.png" className="h-12" alt="" />
+              <img src="/images/logo.png" className="h-12 " alt="" />
             </div>
             <div className="flex gap-4 items-center">
               <div
@@ -60,7 +60,7 @@ function Navbar() {
                 )}
               </div>
               {mobileMenuOpen && (
-                <div className="lg:hidden flex flex-col gap-4 absolute top-16 left-0 w-full bg-white border border-gray-300 rounded-md p-4">
+                <div className="lg:hidden flex flex-col gap-4 absolute top-12 left-0 w-full bg-white border border-gray-300 rounded-md p-4">
                   <a
                     href="#"
                     className="text-gray-600  font-semibold hover:text-black"

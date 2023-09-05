@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-import Home from './pages/Homepage';
+import Home from './pages/Homepage/Homepage';
 import 'font-awesome/css/font-awesome.min.css';
 
 const router = createBrowserRouter([

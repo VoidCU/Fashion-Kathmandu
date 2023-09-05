@@ -14,7 +14,7 @@ function Footer() {
                 </span>
               </div>
               <div className="relative">
-                <div className="flex items-center flex-col md:flex-row">
+                <div className="flex items-center flex-col md:flex-row gap-4 md:gap-0">
                   <input
                     className=" w-full pl-10 h-10 rounded-xl  md:rounded-r-none  px-4 gap-4 md:gap-0"
                     type="email"
