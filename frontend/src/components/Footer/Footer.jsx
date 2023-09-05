@@ -32,30 +32,23 @@ function Footer() {
               <div>
                 <div className="text-2xl font-semibold ">QUICK SHOP</div>
                 <div className="flex flex-col text-sm">
-                  <a href="">New In</a>
-                  <a href="">Best Seller</a>
+                  <a href="#new-in">New In</a>
                   <a href="">Women</a>
+                  <a href="">Bag</a>
                 </div>
               </div>
-              <div>
-                <div className="text-2xl font-semibold">USEFUL LINK</div>
-                <div className="flex flex-col text-sm">
-                  <a href="">About</a>
-                  <a href="">Terms & Condition</a>
-                  <a href="">FAQ</a>
-                </div>
-              </div>
+
               <div>
                 <div className="text-2xl font-semibold">CONTACT US</div>
                 <div className="flex flex-col text-sm font-bold gap-2">
                   <a href="">+977 9851086972</a>
-                  <div className="flex gap-4 text-xl">
-                    <i className="fa fa-facebook"></i>
-                    <i className="fa fa-twitter"></i>
-                    <i className="fa fa-instagram"></i>
-                    <i className="fa fa-youtube-play"></i>
-                  </div>
                 </div>
+              </div>
+              <div className="flex gap-4 text-3xl">
+                <i className="fa fa-facebook"></i>
+                <i className="fa fa-twitter"></i>
+                <i className="fa fa-instagram"></i>
+                <i className="fa fa-youtube-play"></i>
               </div>
             </div>
           </div>

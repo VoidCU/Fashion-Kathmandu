@@ -20,7 +20,7 @@ function Navbar() {
   };
   return (
     <>
-      <nav className="flex w-full flex-col">
+      <nav className=" sticky top-0 bg-white z-50 flex w-full flex-col border-b">
         <div className=" hidden md:block border-b border-gray-400">
           <div className="flex justify-between w-full max-w-6xl m-auto px-4 py-2 ">
             <div className="flex gap-10  ">
@@ -50,7 +50,7 @@ function Navbar() {
             </div>
             <div className="flex gap-4 items-center">
               <div
-                className="lg:hidden cursor-pointer"
+                className="md:hidden cursor-pointer"
                 onClick={toggleMobileMenu}
               >
                 {mobileMenuOpen ? (
@@ -62,7 +62,7 @@ function Navbar() {
               {mobileMenuOpen && (
                 <div className="lg:hidden flex flex-col gap-4 absolute top-12 left-0 w-full bg-white border border-gray-300 rounded-md p-4">
                   <a
-                    href="#"
+                    href="/"
                     className="text-gray-600  font-semibold hover:text-black"
                   >
                     Home
@@ -98,7 +98,7 @@ function Navbar() {
 
             <div className="hidden md:flex gap-4 items-center ">
               <a
-                href="#"
+                href="/"
                 className="text-gray-600  font-semibold hover:text-black"
               >
                 Home
