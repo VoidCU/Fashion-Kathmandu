@@ -1,5 +1,6 @@
 {
   "name": "frontend",
+  "proxy": "http://localhost:5000",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +11,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@material-tailwind/react": "^2.1.1",
+    "axios": "^1.5.0",
     "font-awesome": "^4.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 function Footer() {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -33,15 +34,15 @@ function Footer() {
                 <div className="text-2xl font-semibold ">QUICK SHOP</div>
                 <div className="flex flex-col text-sm">
                   <a href="#new-in">New In</a>
-                  <a href="">Women</a>
-                  <a href="">Bag</a>
+                  <Link to="">Women</Link>
+                  <Link to="">Bag</Link>
                 </div>
               </div>
 
               <div>
                 <div className="text-2xl font-semibold">CONTACT US</div>
                 <div className="flex flex-col text-sm font-bold gap-2">
-                  <a href="">+977 9851086972</a>
+                  +977 9851086972
                 </div>
               </div>
               <div className="flex gap-4 text-3xl">

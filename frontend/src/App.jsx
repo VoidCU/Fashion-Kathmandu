@@ -4,6 +4,7 @@ import Home from './pages/Homepage/Homepage';
 import 'font-awesome/css/font-awesome.min.css';
 import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
+import ProductDetails from './pages/Products/ProductDetails';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: 'contact',
         element: <Contact />,
+      },
+      {
+        path: '/product/:slug',
+        element: <ProductDetails />,
       },
     ],
   },

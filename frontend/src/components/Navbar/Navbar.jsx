@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   const currentDate = new Date();
@@ -24,19 +25,19 @@ function Navbar() {
         <div className=" hidden md:block border-b border-gray-400">
           <div className="flex justify-between w-full max-w-6xl m-auto px-4 py-2 ">
             <div className="flex gap-10  ">
-              <div className="flex gap-2 justify-center items-center text-gray-600">
-                <a href="#">
+              <div className="flex gaLink-2 justify-center items-center text-gray-600 gap-2">
+                <Link to="#">
                   <i className="fa fa-twitter hover:text-black"></i>
-                </a>
-                <a href="#">
+                </Link>
+                <Link to="#">
                   <i className="fa fa-facebook hover:text-black"></i>
-                </a>
-                <a href="#">
+                </Link>
+                <Link to="#">
                   <i className="fa fa-instagram hover:text-black"></i>
-                </a>
-                <a href="#">
+                </Link>
+                <Link to="#">
                   <i className="fa fa-youtube-play hover:text-black"></i>
-                </a>
+                </Link>
               </div>
               <div className="text-sm text-gray-700">
                 Best items you can find anywhere
@@ -66,24 +67,27 @@ function Navbar() {
               </div>
               {mobileMenuOpen && (
                 <div className="lg:hidden flex flex-col gap-4 absolute top-12 left-0 w-full bg-white border border-gray-300 rounded-md p-4">
-                  <a
-                    href="/"
+                  <Link
+                    to="/"
                     className="text-gray-600  font-semibold hover:text-black"
+                    onClick={toggleMobileMenu}
                   >
                     Home
-                  </a>
-                  <a
-                    href="/about"
+                  </Link>
+                  <Link
+                    to="/about"
                     className="text-gray-600 font-semibold hover:text-black"
+                    onClick={toggleMobileMenu}
                   >
                     About
-                  </a>
-                  <a
-                    href="/contact"
+                  </Link>
+                  <Link
+                    to="/contact"
                     className="text-gray-600 font-semibold hover:text-black"
+                    onClick={toggleMobileMenu}
                   >
                     Contact
-                  </a>
+                  </Link>
                   <div className="relative">
                     <input
                       type="text"
@@ -102,24 +106,24 @@ function Navbar() {
             </div>
 
             <div className="hidden md:flex gap-4 items-center ">
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="text-gray-600  font-semibold hover:text-black"
               >
                 Home
-              </a>
-              <a
-                href="/about"
+              </Link>
+              <Link
+                to="/about"
                 className="text-gray-600 font-semibold hover:text-black"
               >
                 About
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/contact"
                 className="text-gray-600 font-semibold hover:text-black"
               >
                 Contact
-              </a>
+              </Link>
               <div className="relative">
                 <input
                   type="text"

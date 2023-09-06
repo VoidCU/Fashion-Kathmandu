@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 function Topcard({ topitems }) {
   return (
     <>
@@ -9,14 +10,16 @@ function Topcard({ topitems }) {
             ${topitems.price}
           </div>
           <div className="font-semibold text-sm pt-2 hover:text-[#008da8] hover:cursor-pointer">
-            MORE DETAILS <i className="fa fa-angle-right font-semibold" />
+            <Link to={`/product/${topitems.slug}`}>
+              MORE DETAILS <i className="fa fa-angle-right font-semibold" />
+            </Link>
           </div>
         </div>
         <div className="min-w-[75px] md:w-[25%]">
           <div>
             <img
               className=" object- w-full max-h-[150px]"
-              src={topitems.image}
+              src={topitems.images[0].imageUrl}
               alt={topitems.name}
             />
           </div>
