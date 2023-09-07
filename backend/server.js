@@ -49,15 +49,6 @@ app.get('/api/categorie/:slug', (req, res) => {
   }
 });
 
-// app.get('/api/categorie/:slug', (req, res) => {
-//   const products = data.products.filter((x) => x.category === req.params.slug);
-//   if (products) {
-//     res.send(products);
-//   } else {
-//     res.status(404).send({ message: 'Products Not Found' });
-//   }
-// });
-
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Serve at http://localhost:${port}`);
