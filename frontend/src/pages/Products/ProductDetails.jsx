@@ -3,6 +3,8 @@ import { useReducer, useEffect, useState } from 'react';
 import axiosInstance from '../../config/Axios';
 import ProductCarousel from '../../components/Carousel/ProductCarousel';
 import { useProducts } from '../../context/ProductsContext';
+import RelatedProduct from './RelatedProduct';
+import ProductQuery from '../../components/Query/ProductQuery';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -39,13 +41,20 @@ function ProductDetails() {
 
   const [currentView, setCurrentView] = useState('photo');
   const [selectedTab, setSelectedTab] = useState('description');
-  // const [relatedProducts, setRelatedProducts] = useState([]);
+  const [isQueryModalOpen, setQueryModalOpen] = useState(false);
 
   const toggleView = (view) => {
     setCurrentView(view);
   };
   const handleTabClick = (tab) => {
     setSelectedTab(tab);
+  };
+
+  const handleQuerySubmit = (queryData) => {
+    // Here, you can send the queryData (name, email, query) to your backend or perform other actions.
+    // For now, let's just display an alert.
+    setQueryModalOpen(false);
+    alert('Your query is recorded. We will get back to you soon.');
   };
 
   useEffect(() => {
@@ -99,16 +108,16 @@ function ProductDetails() {
           <div className="flex justify-center gap-4">
             <button
               onClick={() => toggleView('photo')}
-              className={`bg-gray-500 hover:bg-blue-700 text-white font-bold my-2 py-1 px-4 rounded ${
-                currentView === 'photo' ? 'bg-[#008ba8]' : ''
+              className={` hover:bg-blue-700 text-white font-bold my-2 py-1 px-4 rounded ${
+                currentView === 'photo' ? 'bg-[#008ba8]' : 'bg-gray-500'
               }`}
             >
               Photo
             </button>
             <button
               onClick={() => toggleView('3d')}
-              className={`bg-gray-500 hover:bg-blue-700 text-white font-bold my-2 py-1 px-4 rounded ${
-                currentView === '3d' ? 'bg-[#008ba8]' : ''
+              className={` hover:bg-blue-700 text-white font-bold my-2 py-1 px-4 rounded ${
+                currentView === '3d' ? 'bg-[#008ba8]' : 'bg-gray-500'
               }`}
             >
               3D
@@ -121,11 +130,38 @@ function ProductDetails() {
           <div className="font-bold text-4xl text-[#008ba8]">
             ${product.price}
           </div>
+          <div className="flex items-center">
+            {product.inStock ? (
+              <div className="text-green-500 flex items-center">
+                <i className="fa fa-check-circle mr-2"></i> In Stock
+              </div>
+            ) : (
+              <div className="text-red-500 flex items-center">
+                <i className="fa fa-times-circle mr-2"></i> Out of Stock
+              </div>
+            )}
+          </div>
+          <div className="pt-4">
+            <button
+              className="px-4 py-2 bg-[#008da8] font-semibold text-white rounded hover:bg-blue-700"
+              onClick={() => setQueryModalOpen(true)}
+            >
+              Query
+            </button>
+            {isQueryModalOpen && (
+              <ProductQuery
+                isOpen={isQueryModalOpen}
+                onClose={() => setQueryModalOpen(false)}
+                onSubmit={handleQuerySubmit}
+                productName={product.name}
+              />
+            )}
+          </div>
         </div>
       </div>
       <div>
         <div>
-          <div className="flex justify-center gap-4">
+          <div className="flex justify-center gap-4 pt-4">
             <button
               onClick={() => handleTabClick('description')}
               className={`${
@@ -185,47 +221,7 @@ function ProductDetails() {
         </div>
       </div>
       <div className="max-w-6xl p-4 m-auto">
-        <div className="font-bold text-xl text-center pb-4">
-          Related Products
-        </div>
-        {related.length > 0 ? (
-          <div className="flex flex-wrap justify-center gap-4">
-            {related.map((product) => (
-              <div
-                key={product.id}
-                className="flex flex-col  justify-center items-center border-gray-200 border-2 w-[90vw]  md:w-[300px] h-[175px] hover:bg-[#d9d9d9] hover:cursor-pointer hover:transition-transform duration-300 hover:border-0 hover:scale-105"
-              >
-                <Link to={`/product/${product.slug}`}>
-                  <div className="flex gap-4">
-                    <div className="min-w-[75px] md:w-[25%]">
-                      <div>
-                        <img
-                          className=" object- w-full max-h-[150px]"
-                          src={product.image}
-                          alt={product.name}
-                        />
-                      </div>
-                    </div>
-                    <div className="min-w-[50%]">
-                      <div className="font-light text-sm">
-                        {product.category}
-                      </div>
-                      <div className="font-bold text-xl pb-2">
-                        {product.name}
-                      </div>
-                      <span className="font-light text-sm">Starts</span>
-                      <div className="font-extrabold text-[#008da8] text-2xl">
-                        ${product.price}
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div key="noData">No related products</div>
-        )}
+        <RelatedProduct relatedproducts={related} />
       </div>
     </>
   );

@@ -12,22 +12,19 @@ function Hero({ featured }) {
           />
         </div>
         <div className="flex flex-col gap-4 py-10  ">
-          <div className="font-bold text-xl text-[#008da8]">New Featured</div>
+          <div className="font-bold text-xl text-[#008da8] ">New Featured</div>
           <div className="font-bold text-4xl">{featured[0].name}</div>
-          <div className="text-sm font-light">{featured[0].description}</div>
+          <div className="text-sm font-light italic">
+            {featured[0].category}
+          </div>
 
-          {/* <div className="flex gap-2 items-center text-gray-500">
-            <div>
-              <ul>
-                {featured[0].materials.map((material, index) => (
-                  <li className="text-[#0a0a0a]" key={index}>
-                    <i className="fa fa-check-square text-[#0a0a0a]" />{' '}
-                    {material}
-                  </li>
-                ))}
-              </ul>
-            </div>{' '}
-          </div> */}
+          <div className="flex gap-2 items-center text-gray-500">
+            <i className=" text-yellow-900 fa fa-star"></i>
+            <i className="text-yellow-900 fa fa-star"></i>
+            <i className="text-yellow-900 fa fa-star"></i>
+            <i className="text-yellow-900 fa fa-star"></i>
+            <i className="text-yellow-900 fa fa-star"></i>
+          </div>
           <div className="font-bold text-4xl text-[#008ba8]">
             ${featured[0].price}
           </div>

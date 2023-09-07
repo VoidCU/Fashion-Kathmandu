@@ -10,15 +10,22 @@ function Homepage() {
   const { products } = useProducts();
   // console.log(products[0]);
   const featured = products.slice(0, 1);
-  const newestItems = products
-    .slice() // Create a copy to avoid modifying the original array
-    .sort((a, b) => new Date(b.addedDate) - new Date(a.addedDate))
-    .slice(1, 7);
+  const filteredProducts = products.slice(1).filter((x) => x.inStock);
+  const shuffledProducts = [...filteredProducts]; // Create a copy and exclude the first product
+  for (let i = shuffledProducts.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledProducts[i], shuffledProducts[j]] = [
+      shuffledProducts[j],
+      shuffledProducts[i],
+    ];
+  }
+  const randomTopItems = shuffledProducts.slice(0, 3);
+  const newestItems = filteredProducts.slice(0, 6);
   return (
     <>
       {products.length > 0 && <Hero featured={featured} />}
       <Benefits />
-      <Topitems topitems={newestItems.slice(0, 3)} />
+      <Topitems topitems={randomTopItems} />
       <Newitems newestItems={newestItems} />
       <Category />
     </>
