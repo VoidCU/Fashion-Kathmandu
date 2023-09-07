@@ -15,19 +15,45 @@ app.use((req, res, next) => {
 });
 
 app.get('/api/products', (req, res) => {
-  res.send(data.products);
+  const featuredProduct = data.products.find((product) => product.isFeatured);
+
+  const sortedProducts = [...data.products]
+    .filter((product) => !product.isFeatured) // Filter out non-featured products
+    .sort((a, b) => new Date(b.addedDate) - new Date(a.addedDate)); // Sort by newest to oldest
+
+  const simplifiedFeaturedProduct = {
+    id: featuredProduct.id,
+    name: featuredProduct.name,
+    slug: featuredProduct.slug,
+    price: featuredProduct.price,
+    image: featuredProduct.images[0].imageUrl, // We are selecting the first image URL
+    inStock: featuredProduct.inStock,
+    category: featuredProduct.category,
+  };
+
+  const simplifiedProducts = [
+    simplifiedFeaturedProduct,
+    ...sortedProducts.map((product) => ({
+      id: product.id,
+      name: product.name,
+      slug: product.slug,
+      price: product.price,
+      image: product.images[0].imageUrl, // We are selecting the first image URL
+      inStock: product.inStock,
+      category: product.category,
+    })),
+  ];
+
+  res.send(simplifiedProducts);
 });
 
 app.get('/api/product/:slug', (req, res) => {
   const product = data.products.find((x) => x.slug === req.params.slug);
-  const relatedProducts = data.products.filter(
-    (x) => x.category === product.category && x.slug !== req.params.slug
-  );
-  if (product) {
-    res.send({ product: product, relatedProducts: relatedProducts });
-  } else {
+  if (!product) {
     res.status(404).send({ message: 'Product Not Found' });
+    return;
   }
+  res.send(product);
 });
 
 app.get('/api/categories', (req, res) => {

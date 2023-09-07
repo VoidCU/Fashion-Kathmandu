@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Fuse from 'fuse.js';
+
+import { useProducts } from '../../context/ProductsContext';
 
 function Navbar() {
   const currentDate = new Date();
@@ -9,15 +12,24 @@ function Navbar() {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
 
-  const handleSearch = () => {
-    // Add your search functionality here
-    // You can use the searchQuery state to access the search query value
-    console.log('Search Query:', searchQuery);
+  const { products } = useProducts();
+  const handleSearch = async (query) => {
+    setSearchQuery(query);
+    const sanitizedQuery = query.toLowerCase().replace(/-/g, '');
+    const fuse = new Fuse(products, {
+      keys: ['name'],
+      threshold: 0.4,
+    });
+    const searchResults = fuse.search(sanitizedQuery);
+    setSearchResults(searchResults.slice(0, 3));
   };
 
   const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen); // Toggle the mobile menu state
+    setSearchQuery('');
+    setSearchResults([]);
+    setMobileMenuOpen(!mobileMenuOpen);
   };
   return (
     <>
@@ -94,8 +106,33 @@ function Navbar() {
                       placeholder="Search..."
                       className="pl-8 pr-2 py-1 border border-gray-300 rounded-md"
                       value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery state on input change
+                      onChange={(e) => {
+                        handleSearch(e.target.value);
+                      }}
                     />
+                    {searchResults.length > 0 && (
+                      <div className="z-10 mt-50 bg-white border border-gray-300 rounded-md p-4 mt-2 absolute w-full max-h-48 overflow-y-auto">
+                        <h3 className="text-gray-700 text-sm mb-2">
+                          Search Results:
+                        </h3>
+                        <ul>
+                          {console.log(searchResults)}
+                          {searchResults.map((result) => (
+                            <li
+                              key={result.item.id}
+                              className="rounded hover:bg-[#008da8] text-blue-500 hover:text-white p-2 "
+                            >
+                              <Link
+                                to={`/product/${result.item.slug}`}
+                                className="font-bold "
+                              >
+                                {result.item.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                     <i className="fa fa-search absolute left-2 top-2 text-gray-400"></i>
                     <button onClick={handleSearch} className="hidden">
                       Search
@@ -130,8 +167,33 @@ function Navbar() {
                   placeholder="Search..."
                   className="pl-8 pr-2 py-1 border border-gray-300 rounded-md"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery state on input change
+                  onChange={(e) => {
+                    handleSearch(e.target.value);
+                  }} // Update searchQuery state on input change
                 />
+                {searchResults.length > 0 && (
+                  <div className="z-10 mt-50 bg-white border border-gray-300 rounded-md p-4 mt-2 absolute w-full max-h-48 overflow-y-auto">
+                    <h3 className="text-gray-700 text-sm mb-2">
+                      Search Results:
+                    </h3>
+                    <ul>
+                      {console.log(searchResults)}
+                      {searchResults.map((result) => (
+                        <li
+                          key={result.item.id}
+                          className="rounded hover:bg-[#008da8] text-blue-500 hover:text-white p-2 "
+                        >
+                          <Link
+                            to={`/product/${result.item.slug}`}
+                            className="font-bold "
+                          >
+                            {result.item.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 <i className="fa fa-search absolute left-2 top-2 text-gray-400"></i>
                 <button onClick={handleSearch} className="hidden">
                   Search
@@ -141,6 +203,8 @@ function Navbar() {
           </div>
         </div>
       </nav>
+
+      {/* Display the search results */}
     </>
   );
 }

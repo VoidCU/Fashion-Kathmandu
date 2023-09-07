@@ -19,7 +19,7 @@ function Topcard({ topitems }) {
           <div>
             <img
               className=" object- w-full max-h-[150px]"
-              src={topitems.images[0].imageUrl}
+              src={topitems.image}
               alt={topitems.name}
             />
           </div>

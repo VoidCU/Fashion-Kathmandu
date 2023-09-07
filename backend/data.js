@@ -24,6 +24,7 @@ const data = {
       detailed_description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget dolor.',
       materials: ['Cotton', 'Polyester'],
+      inStock: true,
     },
     {
       id: 2,
@@ -49,6 +50,7 @@ const data = {
       detailed_description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget dolor.',
       materials: ['Silk'],
+      inStock: true,
     },
     {
       id: 3,
@@ -74,6 +76,7 @@ const data = {
       detailed_description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem',
       materials: ['Silk'],
+      inStock: true,
     },
     {
       id: 4,
@@ -99,6 +102,7 @@ const data = {
       detailed_description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do loremLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem',
       materials: ['Silk'],
+      inStock: false,
     },
     {
       id: 5,
@@ -124,6 +128,7 @@ const data = {
       detailed_description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem',
       materials: ['Silk'],
+      inStock: true,
     },
     {
       id: 6,
@@ -149,6 +154,7 @@ const data = {
       detailed_description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem',
       materials: ['Silk'],
+      inStock: true,
     },
     {
       id: 7,
@@ -174,6 +180,7 @@ const data = {
       detailed_description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem',
       materials: ['Silk'],
+      inStock: true,
     },
     {
       id: 8,
@@ -199,6 +206,7 @@ const data = {
       detailed_description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem',
       materials: ['Silk'],
+      inStock: true,
     },
     {
       id: 9,
@@ -224,6 +232,7 @@ const data = {
       detailed_description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem',
       materials: ['Silk'],
+      inStock: true,
     },
     {
       id: 10,
@@ -249,6 +258,7 @@ const data = {
       detailed_description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, diam diam aliquet nunc, eget ultricies nisl nunc eget do lorem',
       materials: ['Silk'],
+      inStock: true,
     },
     // Add more products as needed
   ],

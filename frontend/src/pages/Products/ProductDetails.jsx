@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useReducer, useEffect, useState } from 'react';
 import axiosInstance from '../../config/Axios';
 import ProductCarousel from '../../components/Carousel/ProductCarousel';
+import { useProducts } from '../../context/ProductsContext';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -11,8 +12,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         loading: false,
-        product: action.payload.product,
-        relatedProducts: action.payload.relatedProducts,
+        product: action.payload,
         error: '',
       };
     case 'FETCH_ERROR':
@@ -20,7 +20,6 @@ const reducer = (state, action) => {
         ...state,
         loading: false,
         product: [],
-        relatedProducts: [],
         error: action.payload,
       };
     default:
@@ -29,20 +28,18 @@ const reducer = (state, action) => {
 };
 
 function ProductDetails() {
+  const { products } = useProducts();
   const params = useParams();
   const { slug } = params;
-  const [{ loading, error, product, relatedProducts }, dispatch] = useReducer(
-    reducer,
-    {
-      loading: true,
-      product: [],
-      relatedProducts: [],
-      error: '',
-    }
-  );
+  const [{ loading, error, product }, dispatch] = useReducer(reducer, {
+    loading: true,
+    product: [],
+    error: '',
+  });
 
   const [currentView, setCurrentView] = useState('photo');
   const [selectedTab, setSelectedTab] = useState('description');
+  // const [relatedProducts, setRelatedProducts] = useState([]);
 
   const toggleView = (view) => {
     setCurrentView(view);
@@ -62,6 +59,9 @@ function ProductDetails() {
     })();
   }, [slug]);
 
+  const related = products.filter(
+    (x) => x.category === product.category && x.slug !== product.slug
+  );
   return loading ? (
     <div>Loading...</div>
   ) : error ? (
@@ -188,9 +188,9 @@ function ProductDetails() {
         <div className="font-bold text-xl text-center pb-4">
           Related Products
         </div>
-        {relatedProducts.length > 0 ? (
+        {related.length > 0 ? (
           <div className="flex flex-wrap justify-center gap-4">
-            {relatedProducts.map((product) => (
+            {related.map((product) => (
               <div
                 key={product.id}
                 className="flex flex-col  justify-center items-center border-gray-200 border-2 w-[90vw]  md:w-[300px] h-[175px] hover:bg-[#d9d9d9] hover:cursor-pointer hover:transition-transform duration-300 hover:border-0 hover:scale-105"
@@ -201,7 +201,7 @@ function ProductDetails() {
                       <div>
                         <img
                           className=" object- w-full max-h-[150px]"
-                          src={product.images[0].imageUrl}
+                          src={product.image}
                           alt={product.name}
                         />
                       </div>

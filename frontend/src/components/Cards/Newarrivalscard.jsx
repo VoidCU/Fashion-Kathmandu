@@ -8,7 +8,7 @@ function Newarrivalscard({ newitems }) {
             <div>
               <img
                 className=" object- w-full max-h-[150px]"
-                src={newitems.images[0].imageUrl}
+                src={newitems.image}
                 alt={newitems.name}
               />
             </div>
