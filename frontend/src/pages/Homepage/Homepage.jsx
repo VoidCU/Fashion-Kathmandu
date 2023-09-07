@@ -35,20 +35,7 @@ function Homepage() {
         dispatch({ type: 'FETCH_ERROR', payload: err.message });
       }
     })();
-
-    // dispatch({ type: 'FETCH_REQUEST' });
-    // axios
-    //   .get('http://localhost:5000/api/products')
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     dispatch({ type: 'FETCH_SUCCESS', payload: data });
-    //     console.log(data);
-    //   })
-    //   .catch((err) => {
-    //     dispatch({ type: 'FETCH_ERROR', payload: err.message });
-    //   });
   }, []);
-  console.log(products);
   const featured = products.filter((product) => product.isFeatured === true);
   const newestItems = products
     .slice() // Create a copy to avoid modifying the original array
@@ -56,7 +43,7 @@ function Homepage() {
     .slice(0, 6);
   return (
     <>
-      <Hero featured={featured} />
+      {featured.length > 0 && <Hero featured={featured} />}
       <Benefits />
       <Topitems topitems={newestItems.slice(0, 3)} />
       <Newitems newestItems={newestItems} />

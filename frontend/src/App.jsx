@@ -5,6 +5,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
 import ProductDetails from './pages/Products/ProductDetails';
+import Category from './pages/Category/Category';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/product/:slug',
         element: <ProductDetails />,
+      },
+      {
+        path: '/category/:category',
+        element: <Category />,
       },
     ],
   },

@@ -8,9 +8,21 @@ const reducer = (state, action) => {
     case 'FETCH_REQUEST':
       return { ...state, loading: true };
     case 'FETCH_SUCCESS':
-      return { ...state, loading: false, product: action.payload, error: '' };
+      return {
+        ...state,
+        loading: false,
+        product: action.payload.product,
+        relatedProducts: action.payload.relatedProducts,
+        error: '',
+      };
     case 'FETCH_ERROR':
-      return { ...state, loading: false, product: [], error: action.payload };
+      return {
+        ...state,
+        loading: false,
+        product: [],
+        relatedProducts: [],
+        error: action.payload,
+      };
     default:
       return state;
   }
@@ -19,11 +31,15 @@ const reducer = (state, action) => {
 function ProductDetails() {
   const params = useParams();
   const { slug } = params;
-  const [{ loading, error, product }, dispatch] = useReducer(reducer, {
-    loading: true,
-    product: [],
-    error: '',
-  });
+  const [{ loading, error, product, relatedProducts }, dispatch] = useReducer(
+    reducer,
+    {
+      loading: true,
+      product: [],
+      relatedProducts: [],
+      error: '',
+    }
+  );
 
   const [currentView, setCurrentView] = useState('photo');
   const [selectedTab, setSelectedTab] = useState('description');
@@ -45,6 +61,7 @@ function ProductDetails() {
       }
     })();
   }, [slug]);
+
   return loading ? (
     <div>Loading...</div>
   ) : error ? (
@@ -61,7 +78,7 @@ function ProductDetails() {
           </Link>{' '}
           /{' '}
           <Link
-            to="/"
+            to={`/category/${product.category}`}
             className="text-black font-semibold text-sm hover:text-[#008da8]"
           >
             {product.category}
@@ -166,6 +183,49 @@ function ProductDetails() {
             )}
           </div>
         </div>
+      </div>
+      <div className="max-w-6xl p-4 m-auto">
+        <div className="font-bold text-xl text-center pb-4">
+          Related Products
+        </div>
+        {relatedProducts.length > 0 ? (
+          <div className="flex flex-wrap justify-center gap-4">
+            {relatedProducts.map((product) => (
+              <div
+                key={product._id}
+                className="flex flex-col  justify-center items-center border-gray-200 border-2 w-[90vw]  md:w-[300px] h-[175px] hover:bg-[#d9d9d9] hover:cursor-pointer hover:transition-transform duration-300 hover:border-0 hover:scale-105"
+              >
+                <Link to={`/product/${product.slug}`}>
+                  <div className="flex gap-4">
+                    <div className="min-w-[75px] md:w-[25%]">
+                      <div>
+                        <img
+                          className=" object- w-full max-h-[150px]"
+                          src={product.images[0].imageUrl}
+                          alt={product.name}
+                        />
+                      </div>
+                    </div>
+                    <div className="min-w-[50%]">
+                      <div className="font-light text-sm">
+                        {product.category}
+                      </div>
+                      <div className="font-bold text-xl pb-2">
+                        {product.name}
+                      </div>
+                      <span className="font-light text-sm">Starts</span>
+                      <div className="font-extrabold text-[#008da8] text-2xl">
+                        ${product.price}
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div>No related products</div>
+        )}
       </div>
     </>
   );

@@ -119,7 +119,7 @@ function Navbar() {
                 About
               </Link>
               <Link
-                href="/contact"
+                to="/contact"
                 className="text-gray-600 font-semibold hover:text-black"
               >
                 Contact
