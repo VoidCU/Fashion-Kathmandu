@@ -192,7 +192,7 @@ function ProductDetails() {
           <div className="flex flex-wrap justify-center gap-4">
             {relatedProducts.map((product) => (
               <div
-                key={product._id}
+                key={product.id}
                 className="flex flex-col  justify-center items-center border-gray-200 border-2 w-[90vw]  md:w-[300px] h-[175px] hover:bg-[#d9d9d9] hover:cursor-pointer hover:transition-transform duration-300 hover:border-0 hover:scale-105"
               >
                 <Link to={`/product/${product.slug}`}>
@@ -224,7 +224,7 @@ function ProductDetails() {
             ))}
           </div>
         ) : (
-          <div>No related products</div>
+          <div key="noData">No related products</div>
         )}
       </div>
     </>

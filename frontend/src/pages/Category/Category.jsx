@@ -45,7 +45,6 @@ function Category() {
       }
     })();
   }, [category]);
-  console.log(categoryproduct);
   return loading ? (
     <div>Loading...</div>
   ) : error ? (
