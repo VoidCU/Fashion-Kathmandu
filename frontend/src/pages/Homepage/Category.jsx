@@ -22,10 +22,10 @@ function Category() {
       <div className="font-bold text-2xl pb-4">Category</div>
       <div className="flex flex-wrap justify-around gap-y-2">
         {categories.map((category) => (
-          <div key={category} className="relative w-full max-w-[200px]">
-            <Link to={`/category/${category}`}>
+          <div key={category._id} className="relative w-full ">
+            <Link to={`/category/${category.title}`}>
               <div className="rounded-xl hover:scale-105 w-full bg-[#dcdcdc] p-4 font-bold text-center transform hover:cursor-pointer transition-transform duration-300 ease-in-out">
-                {category}
+                {category.title}
               </div>
             </Link>
           </div>

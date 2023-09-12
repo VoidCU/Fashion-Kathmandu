@@ -1,7 +1,20 @@
 import { Link } from 'react-router-dom';
+import axiosInstance from '../../config/Axios';
 function Footer() {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const email = e.target[0].value;
+    axiosInstance
+      .post('/api/newsletter', { email })
+      .then(() => {
+        alert('Thank you for subscribing to our newsletter.');
+      })
+      .catch((error) => {
+        alert('Error subscribing to newsletter:', error);
+      });
+  };
   return (
     <>
       <div className=" ">
@@ -15,18 +28,26 @@ function Footer() {
                 </span>
               </div>
               <div className="relative">
-                <div className="flex items-center flex-col md:flex-row gap-4 md:gap-0">
-                  <input
-                    className=" w-full pl-10 h-10 rounded-xl  md:rounded-r-none  px-4 gap-4 md:gap-0"
-                    type="email"
-                    placeholder="Enter your email"
-                  />
-                  <i className="fa fa-envelope absolute left-2 top-3 text-gray-400"></i>
+                <form onSubmit={handleSubmit}>
+                  <div className="flex items-center flex-col md:flex-row gap-4 md:gap-0">
+                    <input
+                      className=" w-full pl-10 h-10 rounded-xl  md:rounded-r-none  px-4 gap-4 md:gap-0"
+                      type="email"
+                      name="email"
+                      id="email"
+                      placeholder="Enter your email"
+                      required
+                    />
+                    <i className="fa fa-envelope absolute left-2 top-3 text-gray-400"></i>
 
-                  <button className="bg-[#008da8] text-white px-4 py-2 font-bold">
-                    Subscribe
-                  </button>
-                </div>
+                    <button
+                      className="bg-[#008da8] text-white px-4 py-2 font-bold"
+                      type="submit"
+                    >
+                      Subscribe
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
             <div className="flex flex-col justify-between md:flex-row gap-6">

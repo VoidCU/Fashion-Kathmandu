@@ -5,6 +5,7 @@ import ProductCarousel from '../../components/Carousel/ProductCarousel';
 import { useProducts } from '../../context/ProductsContext';
 import RelatedProduct from './RelatedProduct';
 import ProductQuery from '../../components/Query/ProductQuery';
+import ReviewProduct from './ReviewProduct';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -54,7 +55,6 @@ function ProductDetails() {
     // Here, you can send the queryData (name, email, query) to your backend or perform other actions.
     // For now, let's just display an alert.
     setQueryModalOpen(false);
-    alert('Your query is recorded. We will get back to you soon.');
   };
 
   useEffect(() => {
@@ -103,7 +103,9 @@ function ProductDetails() {
       </div>
       <div className="max-w-6xl m-auto p-4 flex justify-around flex flex-col md:flex-row">
         <div className="w-full md:w-[350px] h-[475px] p-4">
-          {currentView === 'photo' && <ProductCarousel />}
+          {currentView === 'photo' && product && (
+            <ProductCarousel images={product.images} />
+          )}
           {currentView === '3d' && <div>Check</div>}{' '}
           <div className="flex justify-center gap-4">
             <button
@@ -114,22 +116,27 @@ function ProductDetails() {
             >
               Photo
             </button>
-            <button
-              onClick={() => toggleView('3d')}
-              className={` hover:bg-blue-700 text-white font-bold my-2 py-1 px-4 rounded ${
-                currentView === '3d' ? 'bg-[#008ba8]' : 'bg-gray-500'
-              }`}
-            >
-              3D
-            </button>
+            {product.threeDView && (
+              <button
+                onClick={() => toggleView('3d')}
+                className={` hover:bg-blue-700 text-white font-bold my-2 py-1 px-4 rounded ${
+                  currentView === '3d' ? 'bg-[#008ba8]' : 'bg-gray-500'
+                }`}
+              >
+                3D
+              </button>
+            )}
           </div>
         </div>
-        <div className="flex flex-col p-10 md:pt-20 text-left gap-4">
+        <div className="flex flex-col p-10 md:pt-20 text-left gap-4 md:w-[50%]">
           <div className="font-bold text-3xl">{product.name}</div>
-          <div className="text-lg">{product.description}</div>
-          <div className="font-bold text-4xl text-[#008ba8]">
-            ${product.price}
-          </div>
+          <div className="">{product.description}</div>
+          {product.price && (
+            <div className="font-bold text-4xl text-[#008ba8]">
+              ${product.price}
+            </div>
+          )}
+          <div className="font-bold text-xl ">Sizes: {product.sizes}</div>
           <div className="flex items-center">
             {product.inStock ? (
               <div className="text-green-500 flex items-center">
@@ -153,7 +160,7 @@ function ProductDetails() {
                 isOpen={isQueryModalOpen}
                 onClose={() => setQueryModalOpen(false)}
                 onSubmit={handleQuerySubmit}
-                productName={product.name}
+                product={product}
               />
             )}
           </div>
@@ -196,9 +203,11 @@ function ProductDetails() {
           <hr className="border-1 border-[#008ba8] max-w-6xl m-auto" />
           <div className="mt-4 max-w-xl text-center m-auto min-h-[200px]">
             {selectedTab === 'description' && (
-              <div>
-                <p>{product.detailed_description}</p>
-              </div>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: product.detailed_description,
+                }}
+              />
             )}
             {selectedTab === 'materials' && (
               <div>
@@ -212,11 +221,7 @@ function ProductDetails() {
                 </ul>
               </div>
             )}
-            {selectedTab === 'reviews' && (
-              <div>
-                <p>Reviews</p>
-              </div>
-            )}
+            {selectedTab === 'reviews' && <ReviewProduct product={product} />}
           </div>
         </div>
       </div>

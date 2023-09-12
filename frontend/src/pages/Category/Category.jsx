@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useReducer, useEffect, useState } from 'react';
 import axiosInstance from '../../config/Axios';
-import Newarrivalscard from '../../components/Cards/Newarrivalscard';
+import Categorycard from '../../components/Cards/Categorycard';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -57,7 +57,7 @@ function Category() {
         </div>
         <div className="max-w-6xl m-auto p-4 md:pt-4 md:pb-14 flex gap-4 flex-col md:flex-row md:flex-wrap justify-center items-center">
           {categoryproduct.map((item) => (
-            <Newarrivalscard key={item.slug} newitems={item} />
+            <Categorycard key={item.slug} newitems={item} />
           ))}
         </div>
       </div>
