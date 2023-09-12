@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 
 import { Product } from './models/Product.model.js';
 import { Category } from './models/Category.model.js';
