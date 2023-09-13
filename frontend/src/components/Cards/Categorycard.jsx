@@ -8,7 +8,7 @@ function Categorycard({ newitems }) {
             <div>
               <img
                 className="rounded-md object-cover w-full max-h-[150px]"
-                src={`http://localhost:3000/files/${newitems.images}`}
+                src={`http://localhost:3000/files/${newitems.images[0]}`}
                 alt={newitems.name}
               />
             </div>

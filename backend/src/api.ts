@@ -22,7 +22,7 @@ export const startApi = (app: any) => {
       (product) => product.isFeatured === true
     );
     const sortedProducts = [...products]
-      .filter((product) => !product.isFeatured)
+      .filter((product) => product.name !== featuredproduct[0]?.name)
       .sort((a, b) => {
         const createdAtA = new Date(a.get('createdAt')).getTime();
         const createdAtB = new Date(b.get('createdAt')).getTime();

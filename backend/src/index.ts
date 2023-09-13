@@ -6,16 +6,19 @@ import * as url from 'url';
 import path from 'path';
 import { startAdmin } from './admin.js';
 import { startApi } from './api.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const app = express();
 // app.use(express.static(path.join(__dirname, '../public')));
-mongoose.connect('mongodb://127.0.0.1:27017/adminjs');
+mongoose.connect(`${process.env.MONGODB_URI}`);
 
 const MongoDBStore = ConnectMongoDBSession(session);
 const store = new MongoDBStore({
-  uri: `mongodb://127.0.0.1:27017`,
+  // uri: `mongodb://127.0.0.1:27017`,
+  uri: `${process.env.MONGODB_URI}`,
   collection: 'session',
   expires: 1000 * 60 * 60 * 24 * 7,
 });

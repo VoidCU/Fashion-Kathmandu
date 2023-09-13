@@ -8,7 +8,6 @@ import { useProducts } from '../../context/ProductsContext';
 
 function Homepage() {
   const { products } = useProducts();
-  // console.log(products[0]);
   const featured = products.slice(0, 1);
   const filteredProducts = products.slice(1).filter((x) => x.inStock);
   const shuffledProducts = [...filteredProducts]; // Create a copy and exclude the first product
