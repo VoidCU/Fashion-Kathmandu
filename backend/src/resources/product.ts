@@ -3,9 +3,9 @@ import { Product } from '../models/Product.model.js';
 import uploadFeature from '@adminjs/upload';
 
 const localProvider = {
-  bucket: 'public/files',
+  bucket: './frontend/dist/files',
   opts: {
-    baseUrl: 'c:/Users/VoidCU/Desktop/backend/public/files',
+    baseUrl: '/files',
   },
 };
 

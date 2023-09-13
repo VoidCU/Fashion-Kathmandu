@@ -10,7 +10,7 @@ import { startApi } from './api.js';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const app = express();
-app.use(express.static(path.join(__dirname, '../public')));
+// app.use(express.static(path.join(__dirname, '../public')));
 mongoose.connect('mongodb://127.0.0.1:27017/adminjs');
 
 const MongoDBStore = ConnectMongoDBSession(session);
@@ -21,7 +21,9 @@ const store = new MongoDBStore({
 });
 
 app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:5500');
   res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
@@ -33,8 +35,9 @@ app.use((req, res, next) => {
 startAdmin(app, store);
 startApi(app);
 
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../frontend/index.html'));
+  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
 });
 
 const PORT: number = parseInt(process.env.PORT || '3000');

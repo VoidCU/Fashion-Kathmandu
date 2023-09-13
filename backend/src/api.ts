@@ -9,13 +9,13 @@ import { Query } from './models/Query.model.js';
 export const startApi = (app: any) => {
   const router = express.Router();
   app.use(express.json());
-  app.get('/api/products', async (req, res) => {
+  app.get('/api/products', async (req: Request, res: Response) => {
     const products = await Product.find({});
     const categories = await Category.find({});
 
-    const categoryMap = {};
+    const categoryMap: Record<string, string> = {};
     categories.forEach((category) => {
-      categoryMap[category._id] = category.title;
+      categoryMap[category._id.toString()] = category.title;
     });
 
     const featuredproduct = products.filter(
@@ -23,43 +23,60 @@ export const startApi = (app: any) => {
     );
     const sortedProducts = [...products]
       .filter((product) => !product.isFeatured)
-      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      .sort((a, b) => {
+        const createdAtA = new Date(a.get('createdAt')).getTime();
+        const createdAtB = new Date(b.get('createdAt')).getTime();
+        return createdAtB - createdAtA;
+      });
 
-    const simplifiedFeaturedProduct = {
-      id: featuredproduct[0]._id,
-      name: featuredproduct[0].name,
-      slug: featuredproduct[0].slug,
-      price: featuredproduct[0].price,
-      images: featuredproduct[0].images[0],
-      bucket: featuredproduct[0].bucket[0],
-      category: categoryMap[featuredproduct[0].category],
-      isFeatured: featuredproduct[0].isFeatured,
-      inStock: featuredproduct[0].inStock,
-    };
-    const simplifiedProducts = [
-      simplifiedFeaturedProduct,
-      ...sortedProducts.map((product) => ({
-        id: product._id,
-        name: product.name,
-        slug: product.slug,
-        price: product.price,
-        images: product.images[0],
-        bucket: product.bucket[0],
-        category: categoryMap[product.category],
-        inStock: product.inStock,
-      })),
-    ];
-    res.send(simplifiedProducts);
+    if (featuredproduct.length === 0) {
+      const simplifiedProducts = [
+        ...sortedProducts.map((product) => ({
+          id: product._id,
+          name: product.name,
+          slug: product.slug,
+          images: product.images[0],
+          bucket: product.bucket[0],
+          category: categoryMap[product.category.toString()],
+          inStock: product.inStock,
+        })),
+      ];
+      res.send(simplifiedProducts);
+    } else {
+      const simplifiedFeaturedProduct = {
+        id: featuredproduct[0]._id,
+        name: featuredproduct[0].name,
+        slug: featuredproduct[0].slug,
+        images: featuredproduct[0].images[0],
+        bucket: featuredproduct[0].bucket[0],
+        category: categoryMap[featuredproduct[0].category.toString()],
+        isFeatured: featuredproduct[0].isFeatured,
+        inStock: featuredproduct[0].inStock,
+      };
+      const simplifiedProducts = [
+        simplifiedFeaturedProduct,
+        ...sortedProducts.map((product) => ({
+          id: product._id,
+          name: product.name,
+          slug: product.slug,
+          images: product.images[0],
+          bucket: product.bucket[0],
+          category: categoryMap[product.category.toString()],
+          inStock: product.inStock,
+        })),
+      ];
+      res.send(simplifiedProducts);
+    }
   });
 
-  app.get('/api/product/:slug', async (req, res) => {
+  app.get('/api/product/:slug', async (req: Request, res: Response) => {
     const product = await Product.findOne({ slug: req.params.slug });
     const category = await Category.findOne({ _id: product?.category });
     const simplifiedProduct = {
       id: product?._id,
       name: product?.name,
       slug: product?.slug,
-      price: product?.price,
+      // price: product?.price,
       images: product?.images,
       bucket: product?.bucket,
       category: category?.title,
@@ -74,12 +91,12 @@ export const startApi = (app: any) => {
     res.send(simplifiedProduct);
   });
 
-  app.get('/api/categories', async (req, res) => {
+  app.get('/api/categories', async (req: Request, res: Response) => {
     const categories = await Category.find({}, 'title');
     res.send(categories);
   });
 
-  app.get('/api/categorie/:slug', async (req, res) => {
+  app.get('/api/categorie/:slug', async (req: Request, res: Response) => {
     const category = await Category.findOne({ title: req.params.slug });
     if (category) {
       const products = await Product.find({ category: category?._id });
@@ -89,7 +106,7 @@ export const startApi = (app: any) => {
     }
   });
 
-  app.get('/api/reviews/:slug', async (req, res) => {
+  app.get('/api/reviews/:slug', async (req: Request, res: Response) => {
     const reviews = (await Review.find({ product: req.params.slug })).filter(
       (x) => x.flagged
     );
@@ -100,7 +117,7 @@ export const startApi = (app: any) => {
     }
   });
 
-  app.post('/api/reviews/:slug', async (req, res) => {
+  app.post('/api/reviews/:slug', async (req: Request, res: Response) => {
     const { name, email, content } = req.body;
     const product = await Product.findOne({ _id: req.params.slug });
 
@@ -136,7 +153,7 @@ export const startApi = (app: any) => {
     }
   });
 
-  app.post('/api/newsletter', async (req, res) => {
+  app.post('/api/newsletter', async (req: Request, res: Response) => {
     const { email } = req.body;
     const subscriber = new Subscriber({
       email: email,
@@ -154,7 +171,7 @@ export const startApi = (app: any) => {
     }
   });
 
-  app.post('/api/queries/:slug', async (req, res) => {
+  app.post('/api/queries/:slug', async (req: Request, res: Response) => {
     const { name, email, query } = req.body;
     const product = await Product.findOne({ _id: req.params.slug });
 
