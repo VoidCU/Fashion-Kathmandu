@@ -8,7 +8,7 @@ function Newarrivalscard({ newitems }) {
             <div>
               <img
                 className=" rounded-md object-cover w-full max-h-[150px]"
-                src={`http://localhost:3000/files/${newitems.images}`}
+                src={`/files/${newitems.images}`}
                 alt={newitems.name}
               />
             </div>

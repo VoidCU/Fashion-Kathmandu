@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 function Hero({ featured }) {
-  const imageUrl = 'http://localhost:3000/files/' + featured[0].images;
+  const imageUrl = '/files/' + featured[0].images;
   return (
     <div className="bg-[#D9D9D9] p-10">
       <div className=" max-w-4xl w-full m-auto flex flex-col md:flex-row-reverse items-center justify-around gap-10  ">

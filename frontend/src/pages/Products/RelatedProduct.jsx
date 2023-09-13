@@ -17,7 +17,7 @@ function RelatedProduct({ relatedproducts }) {
                     <div>
                       <img
                         className=" rounded-md object-cover w-full max-h-[150px]"
-                        src={`http://localhost:3000/files/${product.images}`}
+                        src={`/files/${product.images}`}
                         alt={product.name}
                       />
                     </div>

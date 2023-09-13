@@ -27,7 +27,7 @@ function ProductCarousel({ images }) {
         {images.map((image, index) => (
           <img
             key={index}
-            src={`http://localhost:3000/files/${image}`}
+            src={`/files/${image}`}
             alt="image 1"
             className="h-full w-full object-cover"
           />
