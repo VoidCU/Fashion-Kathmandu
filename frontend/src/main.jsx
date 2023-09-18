@@ -15,7 +15,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <App>
           <Helmet>
             <title>Fashion Kathmandu</title>
-            <meta name="description" content="We provide best nepali wears" />
           </Helmet>
         </App>
       </ProductsProvider>
