@@ -86,7 +86,7 @@ function ProductDetails() {
         {/* <meta property="og:image" content={product.images[0]} /> */}
         <meta
           property="og:image"
-          content="http://141.148.206.219:3000/files/65015d6c8508d97f4b4b4478/CD-2751-800x800-1.jpg"
+          content="/files/65015d6c8508d97f4b4b4478/CD-2751-800x800-1.jpg"
         />
 
         <meta property="og:url" content={window.location.href} />
