@@ -53,7 +53,7 @@ function Category() {
   ) : (
     <>
       <Helmet>
-        <title>{category.name} | Fashion Kathmandu</title>
+        <title>{category} | Fashion Kathmandu</title>
       </Helmet>
       <div>
         <div className=" max-w-5xl m-auto font-bold text-2xl px-4 py-8">
