@@ -6,6 +6,7 @@ import { useProducts } from '../../context/ProductsContext';
 import RelatedProduct from './RelatedProduct';
 import ProductQuery from '../../components/Query/ProductQuery';
 import ReviewProduct from './ReviewProduct';
+import { Helmet } from 'react-helmet-async';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -52,8 +53,6 @@ function ProductDetails() {
   };
 
   const handleQuerySubmit = (queryData) => {
-    // Here, you can send the queryData (name, email, query) to your backend or perform other actions.
-    // For now, let's just display an alert.
     setQueryModalOpen(false);
   };
 
@@ -77,6 +76,21 @@ function ProductDetails() {
     <div>{error}</div>
   ) : (
     <>
+      <Helmet>
+        <title>{product.name} | Fashion Kathmandu</title>
+        <meta name="description" content={product.description} />
+        <meta name="keywords" content={product.name} />
+        <link
+          rel="canonical"
+          href={'https://fashionkathmandu.com/product/' + `${product.slug}`}
+        />
+        <meta property="og:title" content={product.name} />
+        <meta property="og:description" content={product.description} />
+        <meta property="og:image" content={product.images[0]} />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:type" content="product" />
+        <meta property="og:site_name" content="Fashion Kathmandu" />
+      </Helmet>
       <div className="bg-[#d9d9d9]">
         <div className="max-w-6xl m-auto p-4 ">
           <Link
