@@ -83,7 +83,7 @@ function ProductDetails() {
         <link rel="canonical" href={window.location.href} />
         <meta property="og:title" content={product.name} />
         <meta property="og:description" content={product.description} />
-        <meta property="og:image" content={'/files/' + product.images[0]} />
+        <meta property="og:image" content={'files/' + product.images[0]} />
         <meta property="og:url" content={window.location.href} />
       </Helmet>
       <div className="bg-[#d9d9d9]">

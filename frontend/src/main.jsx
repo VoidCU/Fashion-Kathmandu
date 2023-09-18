@@ -15,6 +15,19 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <App>
           <Helmet>
             <title>Fashion Kathmandu</title>
+            <meta
+              name="description"
+              content="Nepal-based company making an honest effort to make a brand name on Nepalese hand tailored dress"
+            />
+            <meta property="og:image" content="images/webLogo.png" />
+            <meta property="og:title" content="Fashion Kathmandu" />
+            <meta
+              property="og:description"
+              content="Nepal-based company making an honest effort to make a brand name on Nepalese hand tailored dress"
+            />
+            <meta property="og:type" content="website" />
+            <meta property="og:site_name" content="Fashion Kathmandu" />
+            <meta name="twitter:image" content="images/webLogo.png" />
           </Helmet>
         </App>
       </ProductsProvider>
