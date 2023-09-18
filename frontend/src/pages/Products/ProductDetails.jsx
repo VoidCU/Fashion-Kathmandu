@@ -83,15 +83,8 @@ function ProductDetails() {
         <link rel="canonical" href={window.location.href} />
         <meta property="og:title" content={product.name} />
         <meta property="og:description" content={product.description} />
-        {/* <meta property="og:image" content={product.images[0]} /> */}
-        <meta
-          property="og:image"
-          content="/files/65015d6c8508d97f4b4b4478/CD-2751-800x800-1.jpg"
-        />
-
+        <meta property="og:image" content={'/files/' + product.images[0]} />
         <meta property="og:url" content={window.location.href} />
-        <meta property="og:type" content="product" />
-        <meta property="og:site_name" content="Fashion Kathmandu" />
       </Helmet>
       <div className="bg-[#d9d9d9]">
         <div className="max-w-6xl m-auto p-4 ">

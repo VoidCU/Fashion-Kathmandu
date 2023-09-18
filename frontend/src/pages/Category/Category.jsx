@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useReducer, useEffect, useState } from 'react';
 import axiosInstance from '../../config/Axios';
 import Categorycard from '../../components/Cards/Categorycard';
+import { Helmet } from 'react-helmet-async';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -51,6 +52,9 @@ function Category() {
     <div>{error}</div>
   ) : (
     <>
+      <Helmet>
+        <title>{category.name} | Fashion Kathmandu</title>
+      </Helmet>
       <div>
         <div className=" max-w-5xl m-auto font-bold text-2xl px-4 py-8">
           {category}
