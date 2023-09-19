@@ -13,7 +13,9 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const app = express();
 // app.use(express.static(path.join(__dirname, '../public')));
+
 mongoose.connect(`${process.env.MONGODB_URI}`);
+// mongoose.connect(`mongodb://127.0.0.1:27017/adminjs`);
 
 const MongoDBStore = ConnectMongoDBSession(session);
 const store = new MongoDBStore({
@@ -39,6 +41,11 @@ startAdmin(app, store);
 startApi(app);
 
 app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+
+app.get('/frontend/dist/files/*', (req, res, next) => {
+  const xhandle = express.static(path.join(__dirname, '../..'));
+  return xhandle(req, res, next);
+});
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
 });
