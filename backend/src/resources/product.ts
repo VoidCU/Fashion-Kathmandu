@@ -1,4 +1,4 @@
-import { componentLoader, Components } from '../components/components.js';
+import { componentLoader } from '../components/components.js';
 import { Product } from '../models/Product.model.js';
 import uploadFeature from '@adminjs/upload';
 
@@ -17,6 +17,7 @@ export const product = {
       'name',
       'description',
       'price',
+      'images',
       'threeDView',
       'category',
       'sizes',
@@ -30,6 +31,7 @@ export const product = {
       'description',
       'price',
       'file',
+      '3Dfile',
       'category',
       'sizes',
       'materials',
@@ -43,6 +45,14 @@ export const product = {
         isArray: true,
       },
       bucket: {
+        type: 'string',
+        isArray: true,
+      },
+      threeDView: {
+        type: 'string',
+        isArray: true,
+      },
+      threeDViewBucket: {
         type: 'string',
         isArray: true,
       },
@@ -69,7 +79,28 @@ export const product = {
       provider: { local: localProvider },
       multiple: true,
       validation: { mimeTypes: ['image/png', 'image/jpg', 'image/jpeg'] },
-      properties: { key: 'images', bucket: 'bucket' },
+      properties: {
+        key: 'images',
+        bucket: 'bucket',
+        file: 'file',
+        filePath: 'filePath',
+        filesToDelete: 'filesToDelete',
+      },
+      uploadPath: (record, filename) => `${record.id()}/images/${filename}`,
+    }),
+    uploadFeature({
+      componentLoader,
+      provider: { local: localProvider },
+      multiple: true,
+      validation: { mimeTypes: ['image/png', 'image/jpg', 'image/jpeg'] },
+      properties: {
+        key: 'threeDView',
+        bucket: 'threeDViewBucket',
+        file: '3Dfile',
+        filePath: 'threeDfilePath',
+        filesToDelete: 'threeDfilesToDelete',
+      },
+      uploadPath: (record, filename) => `${record.id()}/3D/${filename}`,
     }),
   ],
 };

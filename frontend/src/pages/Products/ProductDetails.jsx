@@ -7,6 +7,7 @@ import RelatedProduct from './RelatedProduct';
 import ProductQuery from '../../components/Query/ProductQuery';
 import ReviewProduct from './ReviewProduct';
 import { Helmet } from 'react-helmet-async';
+import Three60 from '../../components/ThreeD/Three60';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -115,7 +116,12 @@ function ProductDetails() {
           {currentView === 'photo' && product && (
             <ProductCarousel images={product.images} />
           )}
-          {currentView === '3d' && <div>Check</div>}{' '}
+          {currentView === '3d' && (
+            <div>
+              {' '}
+              <Three60 images={product.threeDView} />
+            </div>
+          )}{' '}
           <div className="flex justify-center gap-4">
             <button
               onClick={() => toggleView('photo')}

@@ -7,7 +7,8 @@ export interface IProduct {
   price: number;
   images: string[];
   bucket: string[];
-  threeDView: string;
+  threeDView: string[];
+  threeDViewBucket: string[];
   sizes: string;
   category: Types.ObjectId; // Change the type to ObjectId
   slug: string;
@@ -29,7 +30,8 @@ export const ProductSchema = new Schema<IProduct>(
     category: { type: Schema.Types.ObjectId, ref: 'Category', required: true }, // Reference the Category model
     images: [{ type: String }],
     bucket: [{ type: String }],
-    threeDView: { type: String },
+    threeDView: [{ type: String }],
+    threeDViewBucket: [{ type: String }],
     isFeatured: { type: Boolean },
     inStock: { type: Boolean },
     sizes: { type: String },
