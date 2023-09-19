@@ -2,10 +2,9 @@ import { ReactImageTurntable } from 'react-image-turntable';
 
 function Three60({ images }) {
   const modifiedImages = images.map((imagePath) => `/files/${imagePath}`);
-  console.log(modifiedImages);
   return (
     <>
-      <div className="h-full">
+      <div className="w-full md:w-[350px] ">
         <ReactImageTurntable images={modifiedImages} />
       </div>
     </>

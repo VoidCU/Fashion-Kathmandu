@@ -111,17 +111,19 @@ function ProductDetails() {
           </Link>
         </div>
       </div>
-      <div className="max-w-6xl m-auto p-4 flex justify-around flex flex-col md:flex-row">
-        <div className="w-full md:w-[350px] h-[475px] p-4">
-          {currentView === 'photo' && product && (
-            <ProductCarousel images={product.images} />
-          )}
-          {currentView === '3d' && (
-            <div>
-              {' '}
-              <Three60 images={product.threeDView} />
-            </div>
-          )}{' '}
+      <div className="max-w-6xl m-auto p-4 flex justify-around flex flex-col md:flex-row ">
+        <div className="flex flex-col justify-between">
+          <div className="w-full md:w-[350px] h-[475px]  flex items-center justify-center">
+            {currentView === 'photo' && product && (
+              <ProductCarousel images={product.images} />
+            )}
+            {currentView === '3d' && (
+              <div className="flex items-center justify-center">
+                {' '}
+                <Three60 images={product.threeDView} />
+              </div>
+            )}{' '}
+          </div>
           <div className="flex justify-center gap-4">
             <button
               onClick={() => toggleView('photo')}
@@ -131,7 +133,7 @@ function ProductDetails() {
             >
               Photo
             </button>
-            {product.threeDView && (
+            {product.threeDView.length > 0 && (
               <button
                 onClick={() => toggleView('3d')}
                 className={` hover:bg-blue-700 text-white font-bold my-2 py-1 px-4 rounded ${
