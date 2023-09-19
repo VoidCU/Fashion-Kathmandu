@@ -185,7 +185,7 @@ function ProductDetails() {
       </div>
       <div>
         <div>
-          <div className="flex justify-center gap-4 pt-4">
+          <div className="flex justify-center gap-4">
             <button
               onClick={() => handleTabClick('description')}
               className={`${
