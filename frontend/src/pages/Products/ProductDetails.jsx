@@ -6,7 +6,6 @@ import { useProducts } from '../../context/ProductsContext';
 import RelatedProduct from './RelatedProduct';
 import ProductQuery from '../../components/Query/ProductQuery';
 import ReviewProduct from './ReviewProduct';
-import { Helmet } from 'react-helmet-async';
 import Three60 from '../../components/ThreeD/Three60';
 
 const reducer = (state, action) => {
@@ -78,16 +77,6 @@ function ProductDetails() {
     <div>{error}</div>
   ) : (
     <>
-      <Helmet>
-        <title>{product.name} | Fashion Kathmandu</title>
-        <meta name="description" content={product.description} />
-        <meta name="keywords" content={product.name} />
-        <link rel="canonical" href={window.location.href} />
-        <meta property="og:title" content={product.name} />
-        <meta property="og:description" content={product.description} />
-        <meta property="og:image" content={'files/' + product.images[0]} />
-        <meta property="og:url" content={window.location.href} />
-      </Helmet>
       <div className="bg-[#d9d9d9]">
         <div className="max-w-6xl m-auto p-4 ">
           <Link
