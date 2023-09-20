@@ -62,6 +62,7 @@ function ProductDetails() {
       try {
         const res = await axiosInstance.get(`/api/product/${slug}`);
         dispatch({ type: 'FETCH_SUCCESS', payload: res.data });
+        setCurrentView('photo');
       } catch (err) {
         dispatch({ type: 'FETCH_ERROR', payload: err.message });
       }
@@ -115,7 +116,7 @@ function ProductDetails() {
         <div className="flex flex-col justify-between">
           <div className="w-full md:w-[350px] h-[475px]  flex items-center justify-center">
             {currentView === 'photo' && product && (
-              <ProductCarousel images={product.images} />
+              <ProductCarousel key={product.slug} images={product.images} />
             )}
             {currentView === '3d' && (
               <div className="flex items-center justify-center">

@@ -28,7 +28,7 @@ function ProductCarousel({ images }) {
           <img
             key={index}
             src={`/files/${image}`}
-            alt="image 1"
+            alt={image}
             className="h-full w-full object-cover"
           />
         ))}
