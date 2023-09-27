@@ -8,7 +8,7 @@ function GLTFViewer({ modelPath }) {
   const gltfRef = useRef();
 
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full border rounded-lg ">
       <Canvas style={{ width: '350px', height: '475px' }}>
         <ambientLight intensity={20} />
         <primitive ref={gltfRef} object={gltf.scene} />
@@ -17,9 +17,9 @@ function GLTFViewer({ modelPath }) {
           enableZoom={true}
           enablePan={true}
           enableRotate={true}
-          maxDistance={5}
-          minDistance={1}
-          target={[0, 0, 0]} // Adjust the target to the center of your model
+          maxDistance={2}
+          minDistance={2}
+          target={[0, 1, 0]} // Adjust the target to the center of your model
           args={[gltfRef, { enableDamping: true }]}
         />
       </Canvas>

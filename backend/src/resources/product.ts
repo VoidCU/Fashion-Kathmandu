@@ -92,7 +92,6 @@ export const product = {
       componentLoader,
       provider: { local: localProvider },
       multiple: true,
-      validation: { mimeTypes: ['image/png', 'image/jpg', 'image/jpeg'] },
       properties: {
         key: 'threeDView',
         bucket: 'threeDViewBucket',
