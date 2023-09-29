@@ -17,7 +17,7 @@ function GLTFViewer({ modelPath }) {
           enableZoom={true}
           enablePan={true}
           enableRotate={true}
-          maxDistance={3}
+          maxDistance={4}
           minDistance={2}
           target={[0, 1, 0]} // Adjust the target to the center of your model
           args={[gltfRef, { enableDamping: true }]}
