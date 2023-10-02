@@ -4,8 +4,11 @@ import session from 'express-session';
 import mongoose from 'mongoose';
 import * as url from 'url';
 import path from 'path';
+import cors from 'cors';
 import { startAdmin } from './admin.js';
 import { startApi } from './api.js';
+import { Product } from './models/Product.model.js';
+import fs from 'fs';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -25,17 +28,7 @@ const store = new MongoDBStore({
   expires: 1000 * 60 * 60 * 24 * 7,
 });
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:5500');
-  res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  res.header('Access-Control-Allow-Credentials', 'true');
-  next();
-});
+app.use(cors({ origin: true, credentials: true }));
 
 startAdmin(app, store);
 startApi(app);
@@ -47,6 +40,50 @@ app.get('/frontend/files/*', (req, res, next) => {
   const xhandle = express.static(path.join(__dirname, '../..'));
   return xhandle(req, res, next);
 });
+
+app.get('/product/:slug', (req, res) => {
+  const indexPath = path.join(__dirname, '../../frontend/dist/index.html');
+  fs.readFile(indexPath, 'utf8', async (err, data) => {
+    if (err) {
+      return res.status(500).send('Error loading index.html');
+    }
+    const product = await Product.findOne({ slug: req.params.slug });
+    if (!product) {
+      return res.status(404).send('Product not found');
+    }
+    const modifiedData = data.replace(
+      'Fashion Kathmandu',
+      `${product.name} - Fashion Kathmandu`
+    );
+    const updatedData = modifiedData.replaceAll(
+      'Nepal-based company making an honest effort to make a brand name on Nepalese hand tailored dress',
+      product.description
+    );
+    const updatedData2 = updatedData.replaceAll(
+      'images/logo.png',
+      'files/' + product.images[0] // Assuming the first image in the product's images array is the appropriate one to use
+    );
+
+    res.send(updatedData2);
+  });
+  // res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+});
+
+app.get('/category/:slug', (req, res) => {
+  const indexPath = path.join(__dirname, '../../frontend/dist/index.html');
+  fs.readFile(indexPath, 'utf8', async (err, data) => {
+    if (err) {
+      return res.status(500).send('Error loading index.html');
+    }
+    const modifiedData = data.replace(
+      'Fashion Kathmandu',
+      `${req.params.slug} - Fashion Kathmandu`
+    );
+
+    res.send(modifiedData);
+  });
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
 });

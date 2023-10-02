@@ -42,7 +42,7 @@ export const ProductSchema = new Schema<IProduct>(
 );
 
 ProductSchema.pre('save', async function (next) {
-  this.slug = this.name.toLowerCase().replace(/\s+/g, '-');
+  this.slug = this.name.trim().toLowerCase().replace(/\s+/g, '-');
   console.log(this);
   const Category = model('Category');
 
