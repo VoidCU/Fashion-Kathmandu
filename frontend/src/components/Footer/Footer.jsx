@@ -54,9 +54,9 @@ function Footer() {
               <div>
                 <div className="text-2xl font-semibold ">QUICK SHOP</div>
                 <div className="flex flex-col text-sm">
-                  <a href="#new-in">New In</a>
-                  <Link to="">Women</Link>
-                  <Link to="">Bag</Link>
+                  <a href="/#new-in">New In</a>
+                  <a href="/#top-item">Top Item</a>
+                  <a href="/#category">Category</a>
                 </div>
               </div>
 
@@ -67,10 +67,18 @@ function Footer() {
                 </div>
               </div>
               <div className="flex gap-4 text-3xl">
-                <i className="fa fa-facebook"></i>
-                <i className="fa fa-twitter"></i>
-                <i className="fa fa-instagram"></i>
-                <i className="fa fa-youtube-play"></i>
+                <Link to="#">
+                  <i className="fa fa-whatsapp"></i>
+                </Link>
+                <Link to="#">
+                  <i className="fa fa-twitter"></i>
+                </Link>
+                <Link to="#">
+                  <i className="fa fa-instagram"></i>
+                </Link>
+                <Link to="#">
+                  <i className="fa fa-youtube-play"></i>
+                </Link>
               </div>
             </div>
           </div>

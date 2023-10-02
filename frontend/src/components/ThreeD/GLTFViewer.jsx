@@ -15,7 +15,7 @@ function GLTFViewer({ modelPath }) {
 
         <OrbitControls
           enableZoom={true}
-          enablePan={true}
+          enablePan={false}
           enableRotate={true}
           maxDistance={4}
           minDistance={2}

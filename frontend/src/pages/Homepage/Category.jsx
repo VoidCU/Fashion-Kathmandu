@@ -18,7 +18,7 @@ function Category() {
   }, []);
 
   return (
-    <div className="max-w-5xl px-4 pb-10 m-auto">
+    <div className="max-w-5xl px-4 pb-10 m-auto" id="category">
       <div className="font-bold text-2xl pb-4">Category</div>
       <div className="flex flex-wrap justify-around gap-y-2">
         {categories.map((category) => (

@@ -31,6 +31,12 @@ function Navbar() {
     setSearchResults([]);
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
+  const clearSearch = () => {
+    setMobileMenuOpen(false);
+    setSearchQuery('');
+    setSearchResults([]);
+  };
   return (
     <>
       <nav className=" sticky top-0 bg-white z-50 flex w-full flex-col border-b">
@@ -116,11 +122,11 @@ function Navbar() {
                           Search Results:
                         </h3>
                         <ul>
-                          {console.log(searchResults)}
                           {searchResults.map((result) => (
                             <li
                               key={result.item.id}
                               className="rounded hover:bg-[#008da8] text-blue-500 hover:text-white p-2 "
+                              onClick={clearSearch}
                             >
                               <Link
                                 to={`/product/${result.item.slug}`}
@@ -182,6 +188,7 @@ function Navbar() {
                         <li
                           key={result.item.id}
                           className="rounded hover:bg-[#008da8] text-blue-500 hover:text-white p-2 "
+                          onClick={clearSearch}
                         >
                           <Link
                             to={`/product/${result.item.slug}`}
