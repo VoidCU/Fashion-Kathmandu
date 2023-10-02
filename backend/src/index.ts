@@ -60,7 +60,7 @@ app.get('/product/:slug', (req, res) => {
       product.description
     );
     const updatedData2 = updatedData.replaceAll(
-      'images/logo.png',
+      '/images/logo.png',
       '/files/' + product.images[0] // Assuming the first image in the product's images array is the appropriate one to use
     );
 
