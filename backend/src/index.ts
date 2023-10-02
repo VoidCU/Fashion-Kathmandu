@@ -41,8 +41,9 @@ startAdmin(app, store);
 startApi(app);
 
 app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+app.use(express.static(path.join(__dirname, '../../frontend')));
 
-app.get('/frontend/dist/files/*', (req, res, next) => {
+app.get('/frontend/files/*', (req, res, next) => {
   const xhandle = express.static(path.join(__dirname, '../..'));
   return xhandle(req, res, next);
 });

@@ -3,7 +3,7 @@ import { Product } from '../models/Product.model.js';
 import uploadFeature from '@adminjs/upload';
 
 const localProvider = {
-  bucket: './frontend/dist/files',
+  bucket: './frontend/files',
   opts: {
     baseUrl: '/files',
   },
