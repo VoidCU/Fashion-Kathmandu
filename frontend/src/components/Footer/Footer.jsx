@@ -60,12 +60,7 @@ function Footer() {
                 </div>
               </div>
 
-              <div>
-                <div className="text-2xl font-semibold">CONTACT US</div>
-                <div className="flex flex-col text-sm font-bold gap-2">
-                  +977 9851086972
-                </div>
-              </div>
+          
               <div className="flex gap-4 text-3xl">
                 <Link to="#">
                   <i className="fa fa-whatsapp"></i>
