@@ -61,7 +61,7 @@ app.get('/product/:slug', (req, res) => {
     );
     const updatedData2 = updatedData.replaceAll(
       '/images/logo.png',
-      '/files/' + product.images[0] // Assuming the first image in the product's images array is the appropriate one to use
+      'https://fashionkathmandu.com/files/' + product.images[0] // Assuming the first image in the product's images array is the appropriate one to use
     );
 
     res.send(updatedData2);
