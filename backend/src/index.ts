@@ -59,9 +59,10 @@ app.get('/product/:slug', (req, res) => {
       'Nepal-based company making an honest effort to make a brand name on Nepalese hand tailored dress',
       product.description
     );
+    const imageUrl="https://fashionkathmandu.com/files/" + product.images[0];
     const updatedData2 = updatedData.replaceAll(
       '/images/logo.png',
-      'https://fashionkathmandu.com/files/' + product.images[0] // Assuming the first image in the product's images array is the appropriate one to use
+      imageUrl // Assuming the first image in the product's images array is the appropriate one to use
     );
 
     res.send(updatedData2);
